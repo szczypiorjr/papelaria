@@ -1,0 +1,60 @@
+CREATE DATABASE devmedia;
+CREATE TABLE TB_CLIENTES (
+                id 			INT PRIMARY KEY,
+                nome 			VARCHAR(20) 	notnull,
+                sobrenome 		VARCHAR(30),
+                rg 				VARCHAR(9) notnull,
+				cpf 			VARCHAR(11) notnull,
+				genero 			VARCHAR(15) notnull,
+				data_nasc 		DATE notnull,
+				endereco 		VARCHAR(50) notnull,
+				complemento 	VARCHAR(20) ,
+				estado 			VARCHAR(2) notnull,
+				cidade 			VARCHAR(20) notnull,
+				cep 			VARCHAR(8) notnull,
+				telefone 		VARCHAR(13) notnull,
+				celular 		VARCHAR(15) ,
+				email 			VARCHAR(20)
+);
+
+CREATE TABLE USUARIOS(
+                id 			NUMBER(5)      PRIMARY KEY ,
+                nome 			VARCHAR(30) NOT NULL,
+                senha 			VARCHAR(10) NOT NULL,
+                email 			VARCHAR(30) 		,
+				superusuario 	VARCHAR(1)	NOT NULL
+		
+);
+
+   CREATE SEQUENCE  "DESENV"."USUARIOS_SEQ"  MINVALUE 1 MAXVALUE 9999999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  CYCLE ;
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+   
+   
+   
+ --------------------------------------------------------------------------------------------------------------------------------------------  
+CREATE SEQUENCE  "DESENV"."CLIENTE_SEQ"  MINVALUE 1 MAXVALUE 9999999999 INCREMENT BY 1 START WITH 2 NOCACHE  NOORDER  CYCLE ;
+
+CREATE TABLE "DESENV"."CLIENTE" 
+   (	"ID" NUMBER NOT NULL ENABLE, 
+	"NOME" VARCHAR2(30 BYTE) NOT NULL ENABLE, 
+	"ENDERECO" VARCHAR2(30 BYTE) NOT NULL ENABLE, 
+	"COMPLEMENTO" VARCHAR2(10 BYTE) NOT NULL ENABLE, 
+	"BAIRRO" VARCHAR2(10 BYTE) NOT NULL ENABLE, 
+	"MUNICIPIO" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"UF" VARCHAR2(2 BYTE) NOT NULL ENABLE, 
+	"CEP" VARCHAR2(8 BYTE) NOT NULL ENABLE, 
+	"PESSOA" VARCHAR2(1 BYTE) NOT NULL ENABLE, 
+	"CPF_CNPJ" VARCHAR2(15 BYTE) NOT NULL ENABLE, 
+	 PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+  --------------------------------------------------------------------------------------------------------------------------------------------
