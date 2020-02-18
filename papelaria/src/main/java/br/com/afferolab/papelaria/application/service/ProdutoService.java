@@ -19,14 +19,11 @@ public class ProdutoService {
 	private ProdutoRepository produtoRepository;
 
 	public ProdutoService(){
-
 	}
 
 	public ProdutoService(ProdutoRepository produtoRepository ) {
 		this.produtoRepository=produtoRepository;
-	}
-
-	
+	}	
 
 	public ProdutoRepository getprodutoRepository() {
 		return produtoRepository;
@@ -43,8 +40,4 @@ public class ProdutoService {
 	public Produto cadastrar(Produto produto) {
 		return getprodutoRepository().save(produto);
 	}
-	
-	
-	
-
 }

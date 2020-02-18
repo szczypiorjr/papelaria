@@ -11,9 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("br.com.afferolab.papelaria.application")
 public class PapelariaStart extends SpringBootServletInitializer 
 {
-    public static void main(String[] args) 
-    { 
+    public static void main(String[] args){ 
     	new PapelariaStart().configure(new SpringApplicationBuilder(PapelariaStart.class)).run(args);
     }
-
 }
