@@ -1,2 +1,0 @@
-chamando a applicação
-http://localhost:9000/swapi/planetas/findall

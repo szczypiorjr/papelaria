@@ -33,11 +33,24 @@ public class ProdutoService {
 		this.produtoRepository = produtoRepository;
 	}
 
-	public List<Produto> listarTodos() {
+	public List<Produto> produtos() {
 		return (List<Produto>) getprodutoRepository().findAll();
 	}
 	
 	public Produto cadastrar(Produto produto) {
 		return getprodutoRepository().save(produto);
 	}
+	
+	
+	public void excluir(Long id) {
+		 getprodutoRepository().delete(id);
+	}
+	public Produto buscarPorId(Long id) {
+		return getprodutoRepository().findOne(id);
+	}
+	
+	public boolean existe(Long id) {
+		return getprodutoRepository().exists(id);
+	}
+	
 }

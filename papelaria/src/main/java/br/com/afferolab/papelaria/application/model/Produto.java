@@ -23,7 +23,7 @@ public class Produto implements Serializable{
 	
 	private Long categoria;
 	
-	private Long detalhe;
+	private String detalhe;
 	
 	@Column(name="COD_BARRAS")
 	private String codBarras;
@@ -94,11 +94,11 @@ public class Produto implements Serializable{
 		this.categoria = categoria;
 	}
 
-	public Long getDetalhe() {
+	public String getDetalhe() {
 		return detalhe;
 	}
 
-	public void setDetalhe(Long detalhe) {
+	public void setDetalhe(String detalhe) {
 		this.detalhe = detalhe;
 	}
 	
