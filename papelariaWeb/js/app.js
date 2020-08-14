@@ -28,8 +28,16 @@
 			});
 		};
 		
+		$scope.listarcategorias = function () {
+			$http.get('http://localhost:9000/papelaria/categorias').then(function (response) {
+			$scope.categorias=response.data;
+			});
+		};
+		
 		$scope.reset = function () {
-			$scope.produto = {id: '', nome: '', categoria: '', detalhe: '', codBarras: '',descricao:'',precoMedio:'',quantidade:''};
+			$scope.produto    = {id: '', nome: '', categoria: '', detalhe: '', codBarras: '',descricao:'',precoMedio:'',quantidade:''};
+			//$scope.categoria  = {id: '', nome: ''};
+
 		};
 
 		
