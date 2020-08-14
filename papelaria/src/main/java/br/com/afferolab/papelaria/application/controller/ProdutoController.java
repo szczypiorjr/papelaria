@@ -17,7 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.afferolab.papelaria.application.dto.ProdutoDTO;
+
+
+//TODO:RETIRAR TODAS AS REFERENCIAS ÁS ESTAS ENTIDADES ESTAS ENTIDADES SERÃO MANIPULADAS NAS CAMADAS ABAIXO
+//AQUI SOMENTE DTOS
+//TRATAR DE DTO PARA ENTIDADE E VICE VERSA NA CAMADA DE SERVICE---TRADUTOR
+import br.com.afferolab.papelaria.application.model.Categoria;
 import br.com.afferolab.papelaria.application.model.Produto;
+
+import br.com.afferolab.papelaria.application.service.CategoriaService;
 import br.com.afferolab.papelaria.application.service.ProdutoService;
 
 
@@ -29,6 +38,10 @@ public class ProdutoController
 	@Qualifier(value="produtoService")
 	private ProdutoService produtoService;
 
+	@Autowired
+	@Qualifier(value="categoriaService")
+	private CategoriaService categoriaService;
+	
 
 	public ProdutoController(){
 	}
@@ -43,13 +56,17 @@ public class ProdutoController
 
 	@RequestMapping(value = "/produtos", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Produto> produtos() {
+	public List<ProdutoDTO> produtos() {
 		return getProdutoService().produtos();
 	}
 
 	@RequestMapping(value = "/produtos/cadastrar", method =  RequestMethod.POST)
-	public Produto cadastrar(@Valid @RequestBody Produto produtoNovo){
-		return getProdutoService().cadastrar(produtoNovo);
+	public ProdutoDTO cadastrar(@Valid @RequestBody ProdutoDTO produtoNovo){
+		
+	Categoria categoriaProduto =this.categoriaService.buscarPorId(produtoNovo.getCategoriaId());
+	produtoNovo.setCategoriaId(categoriaProduto.getId());
+	 getProdutoService().cadastrar(produtoNovo);
+	return produtoNovo;
 	}
 	
 	 @RequestMapping(value = "/produtos/excluir/{id}", method = RequestMethod.DELETE)
@@ -69,12 +86,13 @@ public class ProdutoController
 	        	   
 
 	 @RequestMapping(value = "/produtos/produto/{id}", method = RequestMethod.GET)
-	    public ResponseEntity<Produto> produto(@PathVariable(value = "id") long id)
+	    public ResponseEntity<ProdutoDTO> produto(@PathVariable(value = "id") long id)
 	    {
 		 Produto produto = null;
+		 ProdutoDTO produtoDTO= null;
 		   if(getProdutoService().existe(id)) {
 			   produto =  getProdutoService().buscarPorId(id);
-			   return new ResponseEntity<Produto>(produto, HttpStatus.OK);
+			   return new ResponseEntity<ProdutoDTO>(produtoDTO, HttpStatus.OK);
 		   }	           
 	        else
 	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);

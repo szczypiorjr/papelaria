@@ -1,39 +1,17 @@
-package br.com.afferolab.papelaria.application.model;
+package br.com.afferolab.papelaria.application.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="PRODUTO")
-public class Produto implements Serializable{
+public class ProdutoDTO implements Serializable{
 	
 	private static final long serialVersionUID = -159049506471288856L;
 
-	@Id 
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID")
-    @SequenceGenerator(sequenceName = "PRODUTO_SEQ", allocationSize = 1, name = "ID" ,schema="DESENV")
 	private Long id;
 	
-	
-	
-	@OneToOne
-	@JoinColumn(name="ID",table="CATEGORIA")
-	private Categoria categoria;
-	
-	
+	private Long CategoriaId;
 	
 	private String detalhe;
 	
-	@Column(name="COD_BARRAS")
 	private String codBarras;
 	
 	private String descricao;
@@ -42,7 +20,6 @@ public class Produto implements Serializable{
 	
 	private int quantidade;
 
-	@Column(name="PRECO_MEDIO")
 	private double precoMedio;
 
 	public Long getId() {
@@ -94,13 +71,6 @@ public class Produto implements Serializable{
 		this.nome = nome;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
 
 	public String getDetalhe() {
 		return detalhe;
@@ -110,6 +80,12 @@ public class Produto implements Serializable{
 		this.detalhe = detalhe;
 	}
 
-	
+	public Long getCategoriaId() {
+		return CategoriaId;
+	}
+
+	public void setCategoriaId(Long categoriaId) {
+		CategoriaId = categoriaId;
+	}
 	
 }

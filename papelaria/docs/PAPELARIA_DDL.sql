@@ -21,9 +21,25 @@ ALTER TABLE PRODUTO ADD  DETALHE VARCHAR(50);
 --PRECO_MEDIO" NUMBER(18,2)
 ALTER TABLE PRODUTO DROP COLUMN PRECO_MEDIO; 
 ALTER TABLE PRODUTO ADD PRECO_MEDIO NUMBER(18,2); 
+----------------------------------------------------------------------------------------------------------
+ALTER TABLE PRODUTO
+ADD CONSTRAINT FK_CATEGORIA 
+    FOREIGN KEY ("ID")
+    REFERENCES CATEGORIA("ID")
+----------------------------------------------------------------------------------------------------------
+CREATE TABLE CATEGORIA 
+   (	"ID" NUMBER NOT NULL ENABLE, 
+	"NOME" VARCHAR2(30 BYTE) NOT NULL ENABLE, 
+	 PRIMARY KEY ("ID")
+   )
+
+
 
 -----------------------------------------------------------------------------------------------------------
 select * from produto
+
+select * from categoria
+
 delete from   produto
 ------------------------------------------------------------------------------------------------------------
 INSERT INTO PRODUTO 
@@ -31,9 +47,24 @@ INSERT INTO PRODUTO
    VALUES
    (PRODUTO_SEQ.NEXTVAL,'1234567890','DESCRICAO',999,99.99,'NOME',1,'TESTE')
    
+  INSERT INTO CATEGORIA 
+   (ID,NOME)
+   VALUES
+   (CATEGORIA_SEQ.NEXTVAL,'MATERIAL ESCOLAR');
    
+    INSERT INTO CATEGORIA 
+   (ID,NOME)
+   VALUES
+   (CATEGORIA_SEQ.NEXTVAL,'MATERIAL ESCRITORIO');
+   
+    INSERT INTO CATEGORIA 
+   (ID,NOME)
+   VALUES
+   (CATEGORIA_SEQ.NEXTVAL,'ELETRONICOS');
+   
+   SELECT * FROM CATEGORIA;
 ------------------------------------------------------------------------------------------------------------
-
+CREATE SEQUENCE  "CATEGORIA_SEQ"  MINVALUE 1 MAXVALUE 9999999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  CYCLE ;
 
 CREATE TABLE "DESENV"."PRODUTO" 
    (	

@@ -1,5 +1,6 @@
 package br.com.afferolab.papelaria.application.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import br.com.afferolab.papelaria.application.dto.ProdutoDTO;
 import br.com.afferolab.papelaria.application.model.Produto;
 import br.com.afferolab.papelaria.application.repository.ProdutoRepository;
 
@@ -33,11 +35,27 @@ public class ProdutoService {
 		this.produtoRepository = produtoRepository;
 	}
 
-	public List<Produto> produtos() {
-		return (List<Produto>) getprodutoRepository().findAll();
+	public List<ProdutoDTO> produtos() {
+		List<ProdutoDTO> produtos =new ArrayList<ProdutoDTO>();
+		ProdutoDTO p1 =new ProdutoDTO();
+		p1.setNome("creme dental");
+		ProdutoDTO p2 =new ProdutoDTO();
+		p2.setNome("desodorante");
+		ProdutoDTO p3 =new ProdutoDTO();
+		p3.setNome("gel lub KY");
+		
+		produtos.add(p1);
+		produtos.add(p2);
+		produtos.add(p3);
+		//TODO:CRIAR UM TRADUTOR DE PRODUTO PRA PRODUTOdto
+	//	return (List<Produto>) getprodutoRepository().findAll();
+	 
+		return produtos;
 	}
 	
-	public Produto cadastrar(Produto produto) {
+	public Produto cadastrar(ProdutoDTO produtoDto) {
+		//TODO:CRIAR UM TRADUTOR DE PRODUTOdto PRA PRODUTO
+		Produto produto=new Produto();
 		return getprodutoRepository().save(produto);
 	}
 	
