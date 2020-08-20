@@ -1,0 +1,26 @@
+$ mvn install:install-file -Dfile=path/to/your/ojdbc8.jar -DgroupId=com.oracle 
+	-DartifactId=ojdbc8 -Dversion=19.3 -Dpackaging=jar
+	
+	$ mvn install:install-file -Dfile=C:/development/OJDBC/ojdbc8.jar -DgroupId=com.oracle 
+	-DartifactId=ojdbc8 -Dversion=19.3 -Dpackaging=jar
+	
+	
+	C:\Users\Luiz Carlos>mvn install:install-file -Dfile=C:/development/OJDBC/ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=19.3 -Dpackaging=jar
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-install-plugin:2.3.1:install-file (default-cli) @ standalone-pom ---
+[INFO] Installing C:\development\OJDBC\ojdbc8.jar to C:\Users\Luiz Carlos\.m2\repository\com\oracle\ojdbc8\19.3\ojdbc8-19.3.jar
+[INFO] Installing C:\Users\LUIZCA~1\AppData\Local\Temp\mvninstall1927317420943814986.pom to C:\Users\Luiz Carlos\.m2\repository\com\oracle\ojdbc8\19.3\ojdbc8-19.3.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 3.870s
+[INFO] Finished at: Sun Aug 11 14:36:30 BRT 2019
+[INFO] Final Memory: 4M/15M
+[INFO] ------------------------------------------------------------------------
+C:\Users\Luiz Carlos>
+
