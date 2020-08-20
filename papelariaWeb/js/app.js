@@ -3,73 +3,67 @@
 
 	angular.module('papelariaWeb',[])
 	.controller('ProdutoController', function ($scope,$http) {
-
 		
+		$scope.salvar = function () {
 		
-		$scope.cadastrar = function () {
-			var prod =$scope.produto;
-			$http.post('http://localhost:9000/papelaria/produtos/cadastrar',prod);
+			if($scope.produto.id==''){
+				$http.post('http://localhost:9000/PapelariaAPI/produtos/cadastrar',$scope.produto);
+		}else{
+				$http.put('http://localhost:9000/PapelariaAPI/produtos/atualizar',$scope.produto);
+			}
+			$scope.reset();
+			$scope.listarprodutos();
+				event.submitter.disabled=false;
 		};
 
 		$scope.excluir = function (id) {
-			$http.delete('http://localhost:9000/papelaria/produtos/excluir/'+id);
+			$http.delete('http://localhost:9000/PapelariaAPI/produtos/excluir/'+id);
+			$scope.reset();
+			$scope.listarprodutos();
 		};
 
 		$scope.buscar = function (id) {
-			$http.get('http://localhost:9000/papelaria/produtos/produto/'+id).then(function (response) {
+			$http.get('http://localhost:9000/PapelariaAPI/produtos/produto/'+id).then(function (response) {
 			$scope.produto=response.data;
 			});
 			return $scope.produto;
 		};
 		
 		$scope.listarprodutos = function () {
-			$http.get('http://localhost:9000/papelaria/produtos').then(function (response) {
+			$http.get('http://localhost:9000/PapelariaAPI/produtos').then(function (response) {
 			$scope.produtos=response.data;
 			});
 		};
 		
 		$scope.listarcategorias = function () {
-			$http.get('http://localhost:9000/papelaria/categorias').then(function (response) {
+			$http.get('http://localhost:9000/PapelariaAPI/categorias').then(function (response) {
 			$scope.categorias=response.data;
 			});
 		};
 		
 		$scope.reset = function () {
-			$scope.produto    = {id: '', nome: '', categoria: '', detalhe: '', codBarras: '',descricao:'',precoMedio:'',quantidade:''};
-			//$scope.categoria  = {id: '', nome: ''};
-
+			$scope.produto    = {id: '', nome: '', categoriaId: '', detalhe: '', codBarras: '',descricao:'',preco:'',precoDesconto:'',descontoPercentual:'',quantidade:''};
 		};
 
+		$scope.editar=function(id){
+				$scope.produto=$scope.buscar(id);
+				document.getElementsByName("categoria").value=$scope.produto.categoriaId;
+		};
 		
 		//método para adicionar o produto a lista
-		$scope.processar = function (param) {
+		$scope.processar = function () {
 
-			if(event.explicitOriginalTarget.id=='salvar'){
-				//event.explicitOriginalTarget.disabled=true;
-				$scope.cadastrar();	
-				$scope.listarprodutos();
-				//event.explicitOriginalTarget.disabled=false;
-				//alert('sucesso');
-				
-			
-			}
-			if(event.explicitOriginalTarget.id=='editar'){
-				$scope.produto=$scope.buscar(param);
-				document.getElementById("categoria").value=$scope.produto.categoria;
-				
+			if(event.submitter.id=='salvar'){
+				event.submitter.disabled=true;
+				$scope.salvar(false);	
 				
 			}
-			if(event.explicitOriginalTarget.id=='excluir'){
-				$scope.excluir(param);
-				$scope.listarprodutos();
-			}
-			if(event.explicitOriginalTarget.id=='limpar'){
+	
+			if(event.submitter.id=='limpar'){
 				$scope.reset();
 			}
-
-
+		
 		};
-
 
 	});
 

@@ -28,7 +28,7 @@
 				<div class="produto-conteudo">
 					<h1>PAPELARIA WEB-PRODUTOS</h1>
 
-					<form name="formulario" ng-submit="processar('')">
+					<form name="formulario" ng-submit="processar()">
 
 						<div class="form-group">
 							<label for="nome">NOME*</label> <input type="text"
@@ -60,7 +60,7 @@
 						<div class="form-group">
 							<label for="categoria">CATEGORIA*</label> <select
 								name="categoria" id="categoria" required
-								ng-model="produto.categoria">
+								ng-model="produto.categoriaId">
 								<option value="">---CATEGORIA---</option>
 								<!-- not selected / blank option -->
 								<option ng-repeat="categoria in categorias" value="{{categoria.id}}">{{categoria.nome}}</option>
@@ -68,10 +68,24 @@
 						</div>
 
 						<div class="form-group">
-							<label for="precoMedio">PREÇO*</label> <input type="text"
-								class="form-control" id="precoMedio"
-								placeholder="precoMedio do produto" maxlength="21"
-								ng-model="produto.precoMedio">
+							<label for="preco">PREÇO*</label> <input type="text"
+								class="form-control" id="preco"
+								placeholder="preco do produto" maxlength="21"
+								ng-model="produto.preco">
+						</div>
+						
+						<div class="form-group">
+							<label for="precoDesconto">PREÇO COM DESCONTO</label> <input type="text"
+								class="form-control" id="precoDesconto"
+								placeholder="preco do produto com desconto" maxlength="21"
+								ng-model="produto.precoDesconto">
+						</div>
+						
+						<div class="form-group">
+							<label for="descontoPercentual">DESCONTO</label> <input type="text"
+								class="form-control" id="descontoPercentual"
+								placeholder="pecentual de desconto do produto" maxlength="21"
+								ng-model="produto.descontoPercentual">
 						</div>
 
 						<div class="form-group">
@@ -86,10 +100,8 @@
 							class="btn btn-primary"
 							id="salvar" name="salvar">SALVAR</button>
 
-
 						<button type="submit" class="btn btn-primary" id="limpar"
 							name="limpar">LIMPAR</button>
-					
 					</div>
 					</form>
 
@@ -104,9 +116,12 @@
 							<th>NOME</th>
 							<th>DETALHE</th>
 							<th>COD.BARRAS</th>
-							<th>CATEGORIA</th>
+							<th>CATEGORIA ID</th>
+							<th>CATEGORIA NOME</th>
 							<th>DESCRIÇÃO</th>
 							<th>PREÇO</th>
+							<th>PREÇO COM DESCONTO</th>
+							<th>DESCONTO</th>
 							<th>QUANTIDADE</th>
 						</tr>
 					</thead>
@@ -117,18 +132,21 @@
 							<td align="left">{{produto.nome}}</td>
 							<td align="left">{{produto.detalhe}}</td>
 							<td align="justify">{{produto.codBarras}}</td>
-							<td align="right">{{produto.categoria}}</td>
+							<td align="right">{{produto.categoriaId}}</td>
+							<td align="right">{{produto.categoriaNome}}</td>
 							<td align="left">{{produto.descricao}}</td>
-							<td align="right">{{produto.precoMedio}}</td>
+							<td align="right">{{produto.preco}}</td>
+							<td align="right">{{produto.precoDesconto}}</td>
+							<td align="right">{{produto.descontoPercentual}}</td>
 							<td align="right">{{produto.quantidade}}</td>
 
 							<td align="right"><i id="editar"
 								class="glyphicon glyphicon-edit pointer"
-								ng-click="processar(produto.id)" title="editar"></i>
+								ng-click="editar(produto.id)" title="editar"></i>
 							</td>
 							<td align="right"><i id="excluir"
 								class="glyphicon glyphicon-trash pointer"
-								ng-click="processar(produto.id)" title="excluir"></i>
+								ng-click="excluir(produto.id)" title="excluir"></i>
 							</td>
 						</tr>
 					</tbody>
