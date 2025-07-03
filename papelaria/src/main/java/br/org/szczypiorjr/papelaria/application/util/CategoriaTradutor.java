@@ -15,10 +15,7 @@ public class CategoriaTradutor {
 	}
 	
 	public static CategoriaDTO model2dto(Optional<Categoria> optional) {
-		CategoriaDTO categoriaDto= new CategoriaDTO();
-		categoriaDto.setId(optional.get().getId());
-		categoriaDto.setNome(optional.get().getNome());
-		return categoriaDto;
+		return model2dto(optional.get());
 	}
 
 	public static CategoriaDTO model2dto(Categoria categoria) {

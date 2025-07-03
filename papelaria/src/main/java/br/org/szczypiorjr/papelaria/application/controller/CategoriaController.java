@@ -49,36 +49,36 @@ public class CategoriaController
 
 	@PostMapping(value = "/categorias/cadastrar")
 	public void cadastrar(@Valid @RequestBody CategoriaDTO categoriaNovo){
-		 getCategoriaService().cadastrar(categoriaNovo);
+		getCategoriaService().cadastrar(categoriaNovo);
 	}
-	
-	 @DeleteMapping(value = "/categorias/excluir/{id}")
-	 public ResponseEntity<Object> excluir(@PathVariable(value = "id") long id)
-	    {
-		 System.out.println("excluir-> id  "+id);
-		 
-		  if(getCategoriaService().existe(id)) {
-			  CategoriaDTO categoriaDTO = getCategoriaService().buscarPorId(id);
-		        	getCategoriaService().excluir(categoriaDTO.getId());
-		            return new ResponseEntity<>(HttpStatus.OK);
-		        }
-		        else
-		            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  
-		  }
-	        	   
 
-	    @GetMapping(value = "/categorias/categoria/{id}")
-	    public ResponseEntity<CategoriaDTO> categoria(@PathVariable(value = "id") long id)
-	    {
-		 CategoriaDTO categoriaDTO = null;
-		   if(getCategoriaService().existe(id)) {
-			   categoriaDTO =  getCategoriaService().buscarPorId(id);
-			   return new ResponseEntity<CategoriaDTO>(categoriaDTO, HttpStatus.OK);
-		   }	           
-	        else
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
+	@DeleteMapping(value = "/categorias/excluir/{id}")
+	public ResponseEntity<Object> excluir(@PathVariable(value = "id") long id)
+	{
+		System.out.println("excluir-> id  "+id);
+
+		if(getCategoriaService().existe(id)) {
+			CategoriaDTO categoriaDTO = getCategoriaService().buscarPorId(id);
+			getCategoriaService().excluir(categoriaDTO.getId());
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+	}
+
+
+	@GetMapping(value = "/categorias/categoria/{id}")
+	public ResponseEntity<CategoriaDTO> categoria(@PathVariable(value = "id") long id)
+	{
+		CategoriaDTO categoriaDTO = null;
+		if(getCategoriaService().existe(id)) {
+			categoriaDTO =  getCategoriaService().buscarPorId(id);
+			return new ResponseEntity<CategoriaDTO>(categoriaDTO, HttpStatus.OK);
+		}	           
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 
 
 }

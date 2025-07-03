@@ -1,4 +1,34 @@
-estado da aplicação (verificar se está funcionando) ----> http://localhost:8080/
-
-lista de categorias ---->
-http://localhost:8080/categoria/categorias
+curl --location 'http://localhost:8080'
+-----------------------------------------------------------------------------------------
+curl --location 'http://localhost:8080/categoria/categorias'
+-----------------------------------------------------------------------------------------
+curl --location 'http://localhost:8080/categoria/categorias/cadastrar' \
+--header 'Content-Type: application/json' \
+--data '{"nome":"extras"}
+'
+-----------------------------------------------------------------------------------------
+curl --location 'http://localhost:8080/categoria/categorias/categoria/21'
+-----------------------------------------------------------------------------------------
+curl --location --request DELETE 'http://localhost:8080/categoria/categorias/excluir/21'
+-----------------------------------------------------------------------------------------
+curl --location 'http://localhost:8080/produto/produtos'
+-----------------------------------------------------------------------------------------
+curl --location 'http://localhost:8080/produto/produtos/cadastrar' \
+--header 'Content-Type: application/json' \
+--data '{
+        "categoriaId": 4,
+        "detalhe": "  PRODUTO NOVO ",
+        "codBarras": "9999999998",
+        "descricao": "DESCRICAO PRODUTO NOVO ",
+        "nome": "NOME  PRODUTO NOVO",
+        "quantidade": 2,
+        "preco": 0.9,
+        "precoDesconto": 0.4,
+        "descontoPercentual": 5.0
+    }
+'
+-----------------------------------------------------------------------------------------
+curl --location 'http://localhost:8080/produto/produtos/produto/21'
+-----------------------------------------------------------------------------------------
+curl --location --request DELETE 'http://localhost:8080/produto/produtos/excluir/21'
+-----------------------------------------------------------------------------------------

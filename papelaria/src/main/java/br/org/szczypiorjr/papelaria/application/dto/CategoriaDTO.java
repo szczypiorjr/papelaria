@@ -5,13 +5,13 @@ import java.io.Serializable;
 
 
 public class CategoriaDTO implements Serializable{
-	
+
 	private static final long serialVersionUID = -159049506471288856L;
-	
+
 	private Long id;
-	
+
 	private String nome;
-	
+
 
 	public Long getId() {
 		return id;
@@ -28,5 +28,5 @@ public class CategoriaDTO implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 }
