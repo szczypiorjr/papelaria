@@ -19,7 +19,7 @@ public class Categoria implements Serializable{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID")
-    @SequenceGenerator(sequenceName = "CAT_SEQ", allocationSize = 1, name = "ID" ,schema="PAPELARIA")
+    @SequenceGenerator(sequenceName = "categoria_id_seq", allocationSize = 1, name = "ID" ,schema="PAPELARIA")
 	private Long id;
 	
 	private String nome;
