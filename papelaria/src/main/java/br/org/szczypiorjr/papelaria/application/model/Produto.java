@@ -22,7 +22,9 @@ public class Produto implements Serializable{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID")
-	@SequenceGenerator(sequenceName = "produto_id_seq", allocationSize = 1, name = "ID" ,schema="PAPELARIA")
+	@SequenceGenerator(sequenceName = "produto_id_seq", allocationSize = 1, name = "ID" 
+	,schema="PAPELARIA"
+	)
 	private Long id;
 	
 	@OneToOne

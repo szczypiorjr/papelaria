@@ -32,3 +32,32 @@ curl --location 'http://localhost:8080/produto/produtos/produto/21'
 -----------------------------------------------------------------------------------------
 curl --location --request DELETE 'http://localhost:8080/produto/produtos/excluir/21'
 -----------------------------------------------------------------------------------------
+
+----aws--------
+
+curl --location 'http://papelaria-env-dev.us-east-2.elasticbeanstalk.com/categoria/categorias'
+
+curl --location 'http://papelaria-env-dev.us-east-2.elasticbeanstalk.com/produto/produtos'
+
+curl --location 'http://papelaria-env-dev.us-east-2.elasticbeanstalk.com/categoria/categorias/cadastrar' \
+--header 'Content-Type: application/json' \
+--data '{"nome":"extras"}
+
+curl --location 'http://papelaria-env-dev.us-east-2.elasticbeanstalk.com/produto/produtos/cadastrar' \
+--header 'Content-Type: application/json' \
+--data '{
+        "categoriaId": 4,
+        "detalhe": "  PRODUTO NOVO ",
+        "codBarras": "9999999998",
+        "descricao": "DESCRICAO PRODUTO NOVO ",
+        "nome": "NOME  PRODUTO NOVO",
+        "quantidade": 2,
+        "preco": 0.9,
+        "precoDesconto": 0.4,
+        "descontoPercentual": 5.0
+    }
+'
+curl --location 'http://papelaria-env-dev.us-east-2.elasticbeanstalk.com/categoria/categorias/cadastrar' \
+--header 'Content-Type: application/json' \
+--data '{"nome":"extras"}
+'
