@@ -1,0 +1,23 @@
+1 — Acesse a Aba Queues, e cadastre as 3 queues abaixo:
+
+papelaria-pagamento-request-queue
+papelaria-pagamento-response-sucesso-queue
+papelaria-pagamento-response-erro-queue
+
+2 — Acesse a aba Exchange e crie as seguintes exchanges
+
+papelaria-pagamento-request-exchange
+papelaria-pagamento-response-sucesso-exchange
+papelaria-pagamento-response-erro-exchange
+
+3 — E por último acesse cada uma das exchanges e realize o vínculo(BIND) 
+	entre as exchanges e as queues através das rouding keys:
+
+a) papelaria-pagamento-request-exchange:
+  papelaria-pagamento-request-rout-key --> papelaria-pagamento-request-queue
+
+b) papelaria-pagamento-response-sucesso-exchange
+  papelaria-pagamento-response-sucesso-rout-key --> papelaria-pagamento-response-sucesso-queue
+
+c) papelaria-pagamento-response-erro-exchange
+  papelaria-pagamento-response-erro-rout-key --> papelaria-pagamento-response-erro-queue

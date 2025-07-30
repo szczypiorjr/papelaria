@@ -1,0 +1,6 @@
+Para rodar com docker-compose,
+ basta rodar esse comando abaixo no terminal dentro da mesma pasta que se encontra o arquivo acima:
+
+cd /papelaria-pagamentos-message-queueing/docker
+
+docker-compose up

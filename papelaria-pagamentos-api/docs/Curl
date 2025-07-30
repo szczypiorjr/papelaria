@@ -1,0 +1,7 @@
+curl --location 'http://localhost:8081/pagamentos' \
+--header 'Content-Type: application/json' \
+--data '{
+		"numeroPedido": "0001",
+		"valor": 18.00,
+		"produto": "mochila preta nike"
+	}'
