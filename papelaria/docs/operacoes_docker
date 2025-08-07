@@ -1,0 +1,49 @@
+docker_credenciais
+zzpior@hotmail.com
+zzpior
+Zzpior#100
+
+repo
+https://hub.docker.com/repositories/zzpior
+------------------------------------------------------------------------------------------------------------------------------------------
+https://dev.to/diegobrandao/guia-passo-a-passo-deploy-de-uma-api-rest-java-no-docker-33mp
+https://forums.docker.com/t/spotify-docker-maven-plugin-cant-connect-to-localhost-2375/9093/7
+
+0)
+cd C:\Users\zzpio\desenvolvimento\java\repositorios\papelaria\papelaria\
+mvn package
+----------------------------------------------------------------------------------------------------------------------------------
+1)
+docker tag zzpior/papelaria:1.0.1 zzpior/papelaria:tag
+2)
+docker push zzpior/papelaria:1.0.1
+
+
+https://hub.docker.com/repository/docker/zzpior/papelaria/general
+------------------------------------------------------------------------------------------------------------------------------------------
+
+3)
+docker pull zzpior/papelaria:1.0.1
+------------------------------------------------------------------------------------------------------------------------------------------
+
+4)
+docker run -p 8080:8080 zzpior/papelaria:1.0.1 
+------------------------------------------------------------------------------------------------------------------------------------------
+(executo esse se eu quiser ter o postgresql como imagem dentro do container docker / fazer o postgresql rodar no docker )
+5)criar a imagem do postgresql no container
+cmd:
+ cd C:\Users\zzpio\desenvolvimento\java\repositorios\papelaria\papelaria\docker\
+ docker-compose up
+ou se preferir 
+git bash:
+ cd C:\Users\zzpio\desenvolvimento\java\repositorios\papelaria\papelaria\docker\
+sh run-docker.sh
+ 
+
+
+
+curl --location 'http://localhost:8080/categoria/categorias'
+
+
+
+docker stop -p 8080:8080 zzpior/zzpior:1.0.1

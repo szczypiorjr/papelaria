@@ -1,0 +1,167 @@
+dentro do terminal do Docker desktop(dentor do ambiente Docker)
+PS C:\Users\zzpio> ipconfig    
+
+Configuração de IP do Windows
+
+Adaptador Ethernet vEthernet (WSL (Hyper-V firewall)):
+
+   Sufixo DNS específico de conexão. . . . . . :
+   Endereço IPv6 de link local . . . . . . . . : fe80::3d6b:708b:d965:d1e%52
+   Endereço IPv4. . . . . . . .  . . . . . . . : 172.24.240.1
+   Máscara de Sub-rede . . . . . . . . . . . . : 255.255.240.0
+   Gateway Padrão. . . . . . . . . . . . . . . :
+PS C:\Users\zzpio>  
+
+-------------------------------------------------------------------------------------------------
+informação importante: esse é o endereço que representa localhost (máquina local fora do docker)
+visto de dentro do docker ou seja o docker enxerga localhost fora do docker por esse endereço
+se eu quiser acessar o postgresql localhost local na minha máquina e FORA DO DOCKER EU uso esse IP
+obtido pelo ip config executado dentro do terminal interno do docker desktop
+ Endereço IPv4. . . . . . . .  . . . . . . . : 172.24.240.1
+
+para que uma aplicação no container dentro do Docker acesse o banco de dados 
+externo ao container ou seja o banco de dados localmente na minha máquina mas fora do container Docker 
+
+em C:\Users\zzpio\desenvolvimento\java\repositorios\papelaria\papelaria\src\main\resources\application.properties
+teremos 
+spring.datasource.url=jdbc:postgresql://172.24.240.1:5432/PAPELARIA
+se a aplicação spring-boot no container do docker precisar acessar o postgres local na maquina e fora do docker
+-------------------------------------------------------------------------------------------------
+somente adicione adicione nova entrada em C:\Program Files\PostgreSQL\17\data\pg_hba.conf
+embaixo de 
+host    all             all             127.0.0.1/32            scram-sha-256
+
+-------------------------------------------------------------------------------------------------
+host    all             all             0.0.0.0/0	            scram-sha-256
+-------------------------------------------------------------------------------------------------
+C:\Program Files\PostgreSQL\17\data\postgresql.conf
+-------------------------------------------------------------------------------------------------
+listen_addresses = '*'
+-------------------------------------------------------------------------------------------------
+
+C:\Users\zzpio\desenvolvimento\java\repositorios\papelaria\papelaria\src\main\resources\application.properties
+-------------------------------------------------------------------------------------------------
+spring.application.name=papelaria
+spring.main.banner-mode=off
+server.port=${SERVER_PORT:8080}
+#ALTERAR O HOST TODA VEZ QUE O IP DA REDE MUDAR E TIVER QUE EXECUTAR AJUSTES
+#PREVISTOS /papelaria/docs/ORACLE_PROCEDIMENTO_AJUSTES.txt
+#spring.datasource.url=jdbc:oracle:thin:@192.168.0.3:1521:xe
+#spring.datasource.username=PAPELARIA
+#spring.datasource.password=PAPELARIA
+#spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+
+
+#local
+spring.datasource.url=jdbc:postgresql://172.24.240.1:5432/PAPELARIA
+spring.datasource.username=postgres
+spring.datasource.password=admin
+#AWS
+#spring.datasource.url=jdbc:postgresql://papelaria.c5yqcymy6flc.us-east-2.rds.amazonaws.com:5432/principaldb
+#spring.datasource.username=postgres
+#spring.datasource.password=adminAWS123$
+
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+#hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+#spring.jpa.generate= true
+#spring.jpa.hibernate.ddl-auto=update 
+
+
+spring.datasource.hikari.connection-timeout=60000
+spring.datasource.hikari.maximum-pool-size=5
+
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+logging.level.org.hibernate.SQL=debug
+logging.level.=error
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+operações com docker:
+para empacotar e containerizar normalmente
+
+docker_credenciais
+zzpior@hotmail.com
+zzpior
+Zzpior#100
+
+repo
+https://hub.docker.com/repositories/zzpior
+
+0)
+cd C:\Users\zzpio\desenvolvimento\java\repositorios\papelaria\papelaria\
+mvn package
+----------------------------------------------------------------------------------------------------------------------------------
+1)
+docker tag zzpior/papelaria:1.0.1 zzpior/papelaria:tag
+2)
+docker push zzpior/papelaria:1.0.1
+
+
+https://hub.docker.com/repository/docker/zzpior/papelaria/general
+------------------------------------------------------------------------------------------------------------------------------------------
+
+3)
+docker pull zzpior/papelaria:1.0.1
+------------------------------------------------------------------------------------------------------------------------------------------
+
+4)
+docker run -p 8080:8080 zzpior/papelaria:1.0.1 
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+docker compose somente é necessário caso eu precise ter o posgresq---------------------------------dentro do docker----------------------------------------------------------------
+se eu precisar e quiser ter o postgres dentro do docker 
+precisar containerizar o postgresql
+
+preciso fazer como abaixo 
+
+crio o arquivo 
+C:\Users\zzpio\desenvolvimento\java\repositorios\papelaria\papelaria\docker\docker-compose.yml
+-------------------------------------------------------------------------------------------------
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    ports: 
+      - "5432:5432"
+    environment:
+      - DATABASE_HOST=172.24.240.1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=PAPELARIA
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "zzpior@hotmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "80:80"  
+    depends_on:
+      - postgres
+
+------------------------------------------------------------------------------------------------------------------------------------------
+executo: 
+------------------------------------------------------------------------------------------------------------------------------------------
+(executo esse se eu quiser ter o postgresql como imagem dentro do container docker / fazer o postgresql rodar no docker )
+5)criar a imagem do postgresql no container
+cmd:
+ cd C:\Users\zzpio\desenvolvimento\java\repositorios\papelaria\papelaria\docker\
+ docker-compose up
+ou se preferir 
+git bash:
+ cd C:\Users\zzpio\desenvolvimento\java\repositorios\papelaria\papelaria\docker\
+sh run-docker.sh
+-------------------------------------------------------------------------------------------------
+https://dev.to/diegobrandao/guia-passo-a-passo-deploy-de-uma-api-rest-java-no-docker-33mp
+https://felixgilioli.medium.com/como-rodar-um-banco-de-dados-postgres-com-docker-6aecf67995e1
+https://pt.stackoverflow.com/questions/322059/acessar-banco-de-dados-que-est%C3%A1-fora-do-ambiente-docker
+https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach/24326540#24326540
+https://dev.to/21toffy/connect-to-locally-hosted-postgresql-from-a-docker-container-109o
+https://stackoverflow.com/questions/31249112/allow-docker-container-to-connect-to-a-local-host-postgres-database
